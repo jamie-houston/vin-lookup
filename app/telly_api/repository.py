@@ -1,5 +1,6 @@
 from app.models import Car, Dealer, CarModel
 from app import db
+from sqlalchemy.sql.expression import func
 
 
 def create_car(car):
@@ -44,3 +45,9 @@ def get_dealer(dealer_code):
 def get_model(model_code):
     car_model = CarModel.query.filter_by(model_code=model_code).first()
     return car_model
+
+
+def get_latest_car():
+    max_id = db.session.query(func.max(Car.id)).first()
+    return Car.query.filter_by(id=max_id).first()
+

@@ -33,7 +33,7 @@ class Car(db.Model):
             'vin': self.vin,
             'ext_color': self.ext_color,
             'int_color': self.int_color,
-            'model': self.model,
+            'car_model': self.car_model,
             'opt_code': self.opt_code,
             'sold_to': self.sold_to,
             'ship_to': self.ship_to
@@ -82,7 +82,7 @@ class CarModel(db.Model):
 class CarSchema(ma.Schema):
     class Meta:
         # Fields to expose
-        fields = ('id', 'vin', 'ext_color', 'int_color')
+        fields = ('id', 'vin', 'ext_color', 'int_color', 'car_model', 'opt_code', 'sold_to', 'ship_tp')
 
 
 class DealerSchema(ma.Schema):

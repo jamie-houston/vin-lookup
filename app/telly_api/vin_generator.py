@@ -6,6 +6,7 @@ VIN_DIGIT_VALUES = {'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6, 'G': 7, 'H':
                   'W': 6, 'X': 7, 'Y': 8, 'Z': 9, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6,
                   '7': 7, '8': 8, '9': 9, '0': 0}
 
+VIN_YEAR = 'L'
 
 class VinYear:
     def __init__(self, first8, year):
@@ -17,15 +18,18 @@ class VinYear:
 
 
 def get_next_vin(previous_vin):
-    vin_year = get_vin_start()
+    results = []
     char = get_random_vin_char()
     vin_end = int(previous_vin[11:]) + 1
+    vin_combos = get_possible_vins_starts()
+    for combo in vin_combos:
+        vin_year = VinYear(combo, VIN_YEAR)
 
-    v = f'{vin_year.First8}{char}{vin_year.Year}G{vin_end:06}'
+        v = f'{vin_year.First8}{char}{vin_year.Year}G{vin_end:06}'
 
-    check_char = get_check_sum_char(v)
-    v = "%s%s%s" % (v[0:8], check_char, v[9:])
-    return v
+        check_char = get_check_sum_char(v)
+        results.append("%s%s%s" % (v[0:8], check_char, v[9:]))
+    return results
 
 
 def get_check_sum_char(vin):
@@ -57,12 +61,12 @@ def get_random_vin_char():
     return list(VIN_DIGIT_VALUES.keys())[i]
 
 
-def get_vin_start():
-    model = 3
-    year = 'L'
-    first8 = f'5XYP{model}DHC'
+def get_possible_vins_starts():
+    models = [2,3,5,6]
 
-    return VinYear(first8, year)
+    combos = [f'5XYP{model}DHC' for model in models]
+
+    return combos
 
 
 def is_valid_vin(vin):
