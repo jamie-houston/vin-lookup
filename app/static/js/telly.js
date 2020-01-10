@@ -17,3 +17,7 @@ function formatDealer(value, row, index){
 function formatVin(value, row, index){
     return "<a href='/car/"+value+"'>"+value+"</a> - <a href='https://www.kia.com/us/services/en/windowsticker/load/" + value + "' target='_blank'>Sticker</a>";
 }
+
+// function formatOptions(value, row, index){
+//     var options = []
+// }

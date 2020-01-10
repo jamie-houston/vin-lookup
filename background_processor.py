@@ -6,7 +6,7 @@ from app import create_app, db
 sched = BlockingScheduler()
 
 
-@sched.scheduled_job('interval', minutes=3)
+@sched.scheduled_job('interval', minutes=60)
 def update_cars():
     scraping_enabled = os.getenv("ENABLE_SCRAPING")
     if (scraping_enabled != 'True'):
