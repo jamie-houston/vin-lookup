@@ -1,5 +1,5 @@
 from app.models import Car, Dealer, CarModel
-from app import db
+from app import db, cache
 from sqlalchemy.sql.expression import func
 
 
@@ -8,6 +8,7 @@ def create_car(car):
     if (existing_car == None):
         db.session.add(car)
         db.session.commit()
+        cache.delete_memoized(__get_cars_from_db__)
 
     return car
 
@@ -29,7 +30,11 @@ def create_car_model(car_model):
 
 
 def get_cars():
-    return Car.query.order_by(Car.created_date.desc()).limit(1000)
+    return __get_cars_from_db__()
+
+@cache.memoize()
+def __get_cars_from_db__():
+    return Car.query.order_by(Car.created_date.desc()).all()
 
 
 def get_car(vin):

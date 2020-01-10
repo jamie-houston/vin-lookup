@@ -44,10 +44,9 @@
             >
                 <thead>
                 <tr>
-                    <th data-field="vin">VIN</th>
+                    <th data-field="vin" data-formatter="formatVin">VIN</th>
                     <th data-field="title" data-sortable="true">Name</th>
-                    <th data-field="dealer" data-sortable="true">Dealer</th>
-                    <th data-field="dealer" data-sortable="true">Model</th>
+                    <th data-field="model" data-sortable="true">Model</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -55,7 +54,6 @@
                     <tr>
                         <td>{{ car.vin }}</td>
                         <td>{{ car.car_model }}</td>
-                        <td><a href="/dealer/{{ car.sold_to }}">{{ car.sold_to }}</a></td>
                         <td>{{ car.model_info.description }}</td>
                     </tr>
                 {% endfor %}

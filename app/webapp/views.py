@@ -1,14 +1,14 @@
 from flask import render_template
-
 from app.telly_api import repository
 from . import webapp
+from app import cache
 
 
 @webapp.route('/')
+@cache.cached(timeout=50)
 def index():
-    all_cars = repository.get_cars()
     all_dealers = repository.get_dealers()
-    return render_template("cars.html", cars=all_cars, dealers=all_dealers)
+    return render_template("cars.html", dealers=all_dealers)
 
 
 @webapp.route('/car/<vin>')
