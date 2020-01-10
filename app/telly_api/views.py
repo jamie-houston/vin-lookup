@@ -31,10 +31,12 @@ def update_cars():
     previous_car = repository.get_latest_car()
     next_car = None
     last_vin = previous_car.vin
-    while (next_car == None):
+    retries = 0
+    while (next_car == None and retries < 5):
         next_vins = vin_generator.get_next_vin(last_vin)
         next_car = find_vin(next_car, next_vins)
         last_vin = next_vins[0]
+        retries += 1
 
     result = car_schema.dump(next_car)
     return jsonify(result)
