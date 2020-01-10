@@ -29,7 +29,7 @@ def create_car_model(car_model):
 
 
 def get_cars():
-    return Car.query.all()
+    return Car.query.order_by(Car.created_date.desc()).limit(1000)
 
 
 def get_car(vin):

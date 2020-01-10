@@ -47,9 +47,10 @@ def scrape_vin(vin):
     end = start + 5
     ship_to = pdf_text[start:end]
     dealer_address = sold_to.replace(ship_to, '')
+    zip = dealer_address[len(dealer_address)-5:]
 
     car = Car(vin, ext_color, int_color, model_code, opt_code, ship_to, ship_to)
-    dealer = Dealer(ship_to, dealer_address)
+    dealer = Dealer(ship_to, dealer_address, zip)
     car_model  = CarModel(model_code, car_description)
     return car, dealer, car_model
 

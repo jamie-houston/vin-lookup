@@ -1,4 +1,5 @@
 import random
+import itertools
 
 VIN_DIGIT_POSITION_MULTIPLIER = [8, 7, 6, 5, 4, 3, 2, 10, 0, 9, 8, 7, 6, 5, 4, 3, 2]
 VIN_DIGIT_VALUES = {'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6, 'G': 7, 'H': 8, 'J': 1,
@@ -63,8 +64,9 @@ def get_random_vin_char():
 
 def get_possible_vins_starts():
     models = [2,3,5,6]
+    drives = ['D', '4']
 
-    combos = [f'5XYP{model}DHC' for model in models]
+    combos = [f'5XYP{model}{drive}HC' for (model,drive) in itertools.product(models, drives)]
 
     return combos
 

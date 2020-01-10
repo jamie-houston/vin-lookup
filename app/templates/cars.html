@@ -19,7 +19,7 @@
 </head>
 <body>
 <main role="main" class="container">
-
+<div><h6>Last 1000 Cars</h6>
     <div>
         <select id="listSelector">
             <option>Dealers</option>
@@ -39,7 +39,11 @@
             <tr>
                 <th data-field="vin">VIN</th>
                 <th data-field="title" data-sortable="true">Name</th>
+                <th data-field="ext_color" data-sortable="true">Ext Color</th>
+                <th data-field="int_color" data-sortable="true">Int Color</th>
                 <th data-field="dealer" data-sortable="true">Dealer</th>
+                <th>Window Sticker</th>
+                <th data-field="created_date" data-sortable="true">Created</th>
             </tr>
             </thead>
             <tbody>
@@ -47,7 +51,11 @@
                 <tr>
                     <td><a href="/car/{{ car.vin }}">{{ car.vin }}</a></td>
                     <td>{{ car.car_model }}</td>
+                    <td>{{ car.ext_color }}</td>
+                    <td>{{ car.int_color }}</td>
                     <td><a href="/dealer/{{ car.sold_to }}">{{ car.sold_to }}</a></td>
+                    <td><a href="https://www.kia.com/us/services/en/windowsticker/load/{{ car.vin }}" target="_blank">{{ car.vin }}</a></td>
+                    <td>{{ car.created_date }}</td>
                 </tr>
             {% endfor %}
             </tbody>

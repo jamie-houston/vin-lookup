@@ -44,11 +44,13 @@ class Dealer(db.Model):
 
     dealer_code = db.Column(db.String(), primary_key=True)
     address = db.Column(db.String())
+    zip = db.Column(db.String())
     cars = db.relationship('Car', backref='dealer', lazy='dynamic')
 
-    def __init__(self, dealer_code, address):
+    def __init__(self, dealer_code, address, zip):
         self.dealer_code = dealer_code
         self.address = address
+        self.zip = zip
 
     def __repr__(self):
         return '<dealer_code {}>'.format(self.dealer_code)
@@ -56,7 +58,8 @@ class Dealer(db.Model):
     def serialize(self):
         return {
             'dealer_code': self.dealer_code,
-            'address': self.address
+            'address': self.address,
+            'zip': self.zip
         }
 
 
@@ -65,7 +68,7 @@ class CarModel(db.Model):
 
     model_code = db.Column(db.String(), primary_key=True)
     description = db.Column(db.String())
-    car = db.relationship('Car', backref='model_info', lazy='dynamic', uselist=False)
+    car = db.relationship('Car', backref='model_info', uselist=False)
 
     def __init__(self, model_code, description):
         self.model_code = model_code
@@ -90,7 +93,7 @@ class CarSchema(ma.Schema):
 class DealerSchema(ma.Schema):
     class Meta:
         # Fields to expose
-        fields = ('dealer_code', 'address')
+        fields = ('dealer_code', 'address', 'zip')
 
 
 class CarModelSchema(ma.Schema):
