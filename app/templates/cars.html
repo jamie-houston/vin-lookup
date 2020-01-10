@@ -18,16 +18,17 @@
                    data-pagination="true"
                    data-sort-name="id"
                    data-click-to-select="true"
+                   data-filter-control="true"
                    data-url="/api/cars"
             >
                 <thead>
                 <tr>
-                    <th data-field="vin" data-formatter="formatVin">VIN</th>
-                    <th data-field="car_model" data-sortable="true">Model</th>
-                    <th data-field="opt_code" data-sortable="true">Options</th>
-                    <th data-field="ext_color" data-sortable="true">Ext Color</th>
-                    <th data-field="int_color" data-sortable="true">Int Color</th>
-                    <th data-field="sold_to" data-sortable="true" data-formatter="formatDealer">Dealer</th>
+                    <th data-field="vin" data-filter-control="input" data-formatter="formatVin">VIN</th>
+                    <th data-field="car_model" data-filter-control="select" data-sortable="true">Model</th>
+                    <th data-field="opt_code" data-filter-control="select" data-sortable="true">Options</th>
+                    <th data-field="ext_color" data-filter-control="select" data-sortable="true">Ext Color</th>
+                    <th data-field="int_color" data-filter-control="select" data-sortable="true">Int Color</th>
+                    <th data-field="sold_to" data-filter-control="select" data-sortable="true" data-formatter="formatDealer">Dealer</th>
                 </tr>
                 </thead>
                 <tbody>
