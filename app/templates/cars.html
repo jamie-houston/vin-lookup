@@ -24,7 +24,7 @@
         <select id="listSelector">
             <option>Dealers</option>
             {% for dealer in dealers %}
-                <option value="{{ dealer.dealer_code }}">{{ dealer.dealer_code }}</option>
+                <option value="/dealer/{{ dealer.dealer_code }}">{{ dealer.dealer_code }}</option>
             {% endfor %}
         </select>
     </div>
