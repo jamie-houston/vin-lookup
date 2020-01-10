@@ -53,7 +53,7 @@ def get_latest_car():
 
 
 def get_dealers():
-    dealers = Dealer.query.all()
+    dealers = Dealer.query.order_by('dealer_code').all()
     return dealers
 
 

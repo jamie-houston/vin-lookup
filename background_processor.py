@@ -6,10 +6,12 @@ from app import create_app, db
 sched = BlockingScheduler()
 
 
-@sched.scheduled_job('interval', minutes=30)
+@sched.scheduled_job('interval', minutes=3)
 def update_cars():
     scraping_enabled = os.getenv("ENABLE_SCRAPING")
-    if (scraping_enabled == 'True'):
+    if (scraping_enabled != 'True'):
+        print("scraping not enabled")
+    else:
         config_name = os.getenv('FLASK_CONFIG')
         app = create_app(config_name)
         app.app_context().push()
