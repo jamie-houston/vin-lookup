@@ -1,74 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Material Design for Bootstrap fonts and icons -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
-    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/cached/fonts.css') }}"> -->
+{% extends "base.html" %}
 
-    <!-- Material Design for Bootstrap CSS -->
-    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/cached/bootstrap-material-design.min.css') }}"> -->
-    <link rel="stylesheet"
-          href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css"
-          integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.min.css">
+{% block content %}
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/telly.css') }}">
-    <title>Telluride Lookup</title>
-</head>
-<body>
-<main role="main" class="container">
 <div><h6>Last 1000 Cars</h6>
-    <div>
-        <select id="listSelector">
-            <option>Dealers</option>
-            {% for dealer in dealers %}
-                <option value="/dealer/{{ dealer.dealer_code }}">{{ dealer.dealer_code }}</option>
-            {% endfor %}
-        </select>
+        <div>
+            <select id="listSelector">
+                <option>Dealers</option>
+                {% for dealer in dealers %}
+                    <option value="/dealer/{{ dealer.dealer_code }}">{{ dealer.dealer_code }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="table-responsive">
+            <table id="table" data-toggle="table" data-classes="table table-no-bordered table-hover table-sm"
+                   data-show-columns="true"
+                   data-search="true"
+                   data-pagination="true"
+                   data-sort-name="id"
+                   data-click-to-select="true"
+                   data-url="/api/cars"
+            >
+                <thead>
+                <tr>
+                    <th data-field="vin" data-formatter="formatVin">VIN</th>
+                    <th data-field="car_model" data-sortable="true">Model</th>
+                    <th data-field="opt_code" data-sortable="true">Options</th>
+                    <th data-field="ext_color" data-sortable="true">Ext Color</th>
+                    <th data-field="int_color" data-sortable="true">Int Color</th>
+                    <th data-field="sold_to" data-sortable="true" data-formatter="formatDealer">Dealer</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
     </div>
-    <div class="table-responsive">
-        <table id="table" data-toggle="table" data-classes="table table-no-bordered table-hover table-sm"
-               data-show-columns="true"
-               data-search="true"
-               data-pagination="true"
-               data-sort-name="id"
-               data-click-to-select="true"
-               data-url="/api/cars"
-        >
-            <thead>
-            <tr>
-                <th data-field="vin" data-formatter="formatVin">VIN</th>
-                <th data-field="car_model" data-sortable="true">Model</th>
-                <th data-field="opt_code" data-sortable="true">Options</th>
-                <th data-field="ext_color" data-sortable="true">Ext Color</th>
-                <th data-field="int_color" data-sortable="true">Int Color</th>
-                <th data-field="sold_to" data-sortable="true" data-formatter="formatDealer">Dealer</th>
-            </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-    </div>
-    </div>
-</main>
-
-</body>
-<!-- <script src="{{ url_for('static', filename='js/cached/jquery-3.3.1.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/cached/popper.js') }}"></script>
-<script src="{{ url_for('static', filename='js/cached/bootstrap-material-design.js') }}"></script>
-<script src="{{ url_for('static', filename='js/cached/bootstrap-table.min.js') }}"></script> -->
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"
-        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
-<script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js"
-        integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U"
-        crossorigin="anonymous"></script>
-<script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js"
-        integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9"
-        crossorigin="anonymous"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.min.js"></script>
-<script src="{{ url_for('static', filename='js/telly.js') }}"></script>
-<script src="{{ url_for('static', filename='js/table.js') }}"></script>
-</html>
+{% endblock %}
