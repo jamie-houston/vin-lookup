@@ -3,6 +3,7 @@ from flask import request, jsonify
 from app.models import Car, CarSchema
 from . import telly_api
 from app.telly_api import repository, vin_lookup
+from . import vin_generator
 
 car_schema = CarSchema()
 
@@ -32,3 +33,7 @@ def get_cars():
 def update_cars():
     return 'wip'
 
+
+@telly_api.route("/next/<vin>", methods=["GET"])
+def next_vin(vin):
+    return vin_generator.get_next_vin(vin)
