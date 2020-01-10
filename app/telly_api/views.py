@@ -5,6 +5,7 @@ from . import telly_api
 from app.telly_api import repository, vin_generator, vin_service
 
 car_schema = CarSchema()
+cars_schema = CarSchema(many=True)
 
 
 # endpoint to create new car
@@ -20,7 +21,7 @@ def add_car(vin):
 def get_cars():
     all_cars = repository.get_cars()
 
-    result = car_schema.dump(all_cars)
+    result = cars_schema.dump(all_cars)
 
     return jsonify(result)
 

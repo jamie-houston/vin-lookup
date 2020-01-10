@@ -9,3 +9,11 @@ function switchList(){
     location.href = url;
   }
 }
+
+function formatDealer(value, row, index){
+    return "<a href='/dealer/"+value+"'>"+value+"</a>";
+}
+
+function formatVin(value, row, index){
+    return "<a href='/car/"+value+"'>"+value+"</a>";
+}

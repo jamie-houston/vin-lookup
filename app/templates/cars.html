@@ -14,7 +14,7 @@
           integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.min.css">
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/anytag.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/telly.css') }}">
     <title>Telluride Lookup</title>
 </head>
 <body>
@@ -35,34 +35,19 @@
                data-pagination="true"
                data-sort-name="id"
                data-click-to-select="true"
+               data-url="/api/cars"
         >
             <thead>
             <tr>
-                <th data-field="vin">VIN</th>
-                <th data-field="description" data-sortable="true">Description</th>
-                <th data-field="model" data-sortable="true">Model</th>
-                <th data-field="options" data-sortable="true">Options</th>
+                <th data-field="vin" data-formatter="formatVin">VIN</th>
+                <th data-field="car_model" data-sortable="true">Model</th>
+                <th data-field="opt_code" data-sortable="true">Options</th>
                 <th data-field="ext_color" data-sortable="true">Ext Color</th>
                 <th data-field="int_color" data-sortable="true">Int Color</th>
-                <th data-field="dealer" data-sortable="true">Dealer</th>
-                <th>Window Sticker</th>
-                <th data-field="created_date" data-sortable="true">Created</th>
+                <th data-field="sold_to" data-sortable="true" data-formatter="formatDealer">Dealer</th>
             </tr>
             </thead>
             <tbody>
-            {% for car in cars %}
-                <tr>
-                    <td><a href="/car/{{ car.vin }}">{{ car.vin }}</a></td>
-                    <td>{{ car.model_info.description }}</td>
-                    <td>{{ car.car_model }}</td>
-                    <td>{{ car.opt_code }}</td>
-                    <td>{{ car.ext_color }}</td>
-                    <td>{{ car.int_color }}</td>
-                    <td><a href="/dealer/{{ car.sold_to }}">{{ car.sold_to }}</a></td>
-                    <td><a href="https://www.kia.com/us/services/en/windowsticker/load/{{ car.vin }}" target="_blank">{{ car.vin }}</a></td>
-                    <td>{{ car.created_date }}</td>
-                </tr>
-            {% endfor %}
             </tbody>
         </table>
     </div>
@@ -84,6 +69,6 @@
         integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9"
         crossorigin="anonymous"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.min.js"></script>
-<script src="{{ url_for('static', filename='js/anytag.js') }}"></script>
+<script src="{{ url_for('static', filename='js/telly.js') }}"></script>
 <script src="{{ url_for('static', filename='js/table.js') }}"></script>
 </html>
