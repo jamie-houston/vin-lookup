@@ -12,7 +12,7 @@ class Car(db.Model):
     car_model = db.Column(db.String(), db.ForeignKey('car_models.model_code'))
     opt_code = db.Column(db.String())
     sold_to = db.Column(db.String(), db.ForeignKey('dealers.dealer_code'))
-    ship_to = db.Column(db.String(), db.ForeignKey('dealers.dealer_code'))
+    ship_to = db.Column(db.String())
     created_date = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
     def __init__(self, vin, ext_color, int_color, car_model, opt_code, sold_to, ship_to):
@@ -44,6 +44,7 @@ class Dealer(db.Model):
 
     dealer_code = db.Column(db.String(), primary_key=True)
     address = db.Column(db.String())
+    cars = db.relationship('Car', backref='dealer', lazy='dynamic')
 
     def __init__(self, dealer_code, address):
         self.dealer_code = dealer_code
@@ -64,6 +65,7 @@ class CarModel(db.Model):
 
     model_code = db.Column(db.String(), primary_key=True)
     description = db.Column(db.String())
+    car = db.relationship('Car', backref='model_info', lazy='dynamic', uselist=False)
 
     def __init__(self, model_code, description):
         self.model_code = model_code

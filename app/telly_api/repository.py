@@ -28,7 +28,7 @@ def create_car_model(car_model):
     return car_model
 
 
-def get_all_cars():
+def get_cars():
     return Car.query.all()
 
 
@@ -51,3 +51,12 @@ def get_latest_car():
     max_id = db.session.query(func.max(Car.id)).first()
     return Car.query.filter_by(id=max_id).first()
 
+
+def get_dealers():
+    dealers = Dealer.query.all()
+    return dealers
+
+
+def get_dealer_cars(dealer_code):
+    cars = Car.query.filter_by(ship_to=dealer_code).all()
+    return cars
