@@ -26,3 +26,9 @@ def dealer_info(dealer_code):
     return render_template("dealer.html", dealer=dealer, cars=cars)
 
 
+@webapp.route('/dealers')
+@cache.cached(timeout=50)
+def dealers():
+    return render_template("dealers.html")
+
+

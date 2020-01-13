@@ -1,11 +1,12 @@
 from flask import request, jsonify
 
-from app.models import CarSchema
+from app.models import CarSchema, DealerSchema
 from . import telly_api
 from app.telly_api import repository, vin_generator, vin_service
 
 car_schema = CarSchema()
 cars_schema = CarSchema(many=True)
+dealers_schema = DealerSchema(many=True)
 
 
 # endpoint to create new car
@@ -38,3 +39,11 @@ def update_cars():
 def next_vin(vin):
     return jsonify(vin_generator.get_next_vin(vin))
 
+
+@telly_api.route("/api/dealers", methods=["GET"])
+def get_dealers():
+    dealers = repository.get_dealers()
+
+    result = dealers_schema.dump(dealers)
+
+    return jsonify(result)

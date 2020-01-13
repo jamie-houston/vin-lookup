@@ -13,7 +13,7 @@ def import_file():
     app = create_app(config_name)
     app.app_context().push()
 
-    with open('test2.json') as json_file:
+    with open('test3.json') as json_file:
         data = json.load(json_file)
         try:
             for data_row in data:

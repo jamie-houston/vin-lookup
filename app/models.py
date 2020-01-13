@@ -1,5 +1,6 @@
 from app import db, ma
 import datetime
+from sqlalchemy_utils import aggregated
 
 
 class Car(db.Model):
@@ -46,6 +47,11 @@ class Dealer(db.Model):
     dealer_code = db.Column(db.String(), primary_key=True)
     address = db.Column(db.String())
     zip = db.Column(db.String())
+
+    @aggregated('cars', db.Column(db.Integer))
+    def car_count(self):
+        return db.func.count('1')
+
     cars = db.relationship('Car', backref='dealer', lazy='dynamic')
 
     def __init__(self, dealer_code, address, zip):
@@ -60,7 +66,8 @@ class Dealer(db.Model):
         return {
             'dealer_code': self.dealer_code,
             'address': self.address,
-            'zip': self.zip
+            'zip': self.zip,
+            'car_count': self.car_count
         }
 
 
@@ -94,7 +101,7 @@ class CarSchema(ma.Schema):
 class DealerSchema(ma.Schema):
     class Meta:
         # Fields to expose
-        fields = ('dealer_code', 'address', 'zip')
+        fields = ('dealer_code', 'address', 'zip', 'car_count')
 
 
 class CarModelSchema(ma.Schema):
