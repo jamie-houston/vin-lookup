@@ -36,7 +36,8 @@ class Car(db.Model):
             'car_model': self.car_model,
             'opt_code': self.opt_code,
             'sold_to': self.sold_to,
-            'ship_to': self.ship_to
+            'ship_to': self.ship_to,
+            'created_date': self.created_date
         }
 
 class Dealer(db.Model):
@@ -87,7 +88,7 @@ class CarModel(db.Model):
 class CarSchema(ma.Schema):
     class Meta:
         # Fields to expose
-        fields = ('id', 'vin', 'ext_color', 'int_color', 'car_model', 'opt_code', 'sold_to', 'ship_tp')
+        fields = ('id', 'vin', 'ext_color', 'int_color', 'car_model', 'opt_code', 'sold_to', 'ship_tp', 'created_date')
 
 
 class DealerSchema(ma.Schema):

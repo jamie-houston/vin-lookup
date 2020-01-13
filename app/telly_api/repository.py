@@ -1,3 +1,5 @@
+from sqlalchemy.exc import IntegrityError
+
 from app.models import Car, Dealer, CarModel
 from app import db, cache
 from sqlalchemy.sql.expression import func
@@ -6,9 +8,12 @@ from sqlalchemy.sql.expression import func
 def create_car(car):
     existing_car = get_car(car.vin)
     if (existing_car == None):
-        db.session.add(car)
-        db.session.commit()
-        cache.delete_memoized(__get_cars_from_db__)
+        try:
+            db.session.add(car)
+            db.session.commit()
+            cache.delete_memoized(__get_cars_from_db__)
+        except IntegrityError as e:
+            db.session().rollback()
 
     return car
 
