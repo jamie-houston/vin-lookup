@@ -7,8 +7,7 @@ from app import cache
 @webapp.route('/')
 @cache.cached(timeout=50)
 def index():
-    all_dealers = repository.get_dealers()
-    return render_template("cars.html", dealers=all_dealers)
+    return render_template("cars.html")
 
 
 @webapp.route('/car/<vin>')

@@ -52,3 +52,7 @@ function formatModel(value, row, index) {
         };
     return models[value];
 }
+
+function formatDate(value, row, index){
+    return moment(value).format('L');
+}

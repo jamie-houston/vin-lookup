@@ -1,8 +1,7 @@
 from sqlalchemy.exc import IntegrityError
-
+from sqlalchemy.sql.expression import func
 from app.models import Car, Dealer, CarModel
 from app import db, cache
-from sqlalchemy.sql.expression import func
 
 
 def create_car(car):
@@ -13,6 +12,7 @@ def create_car(car):
             db.session.commit()
             cache.delete_memoized(__get_cars_from_db__)
         except IntegrityError as e:
+            print(f"Error creating car {e}")
             db.session().rollback()
 
     return car
@@ -21,8 +21,13 @@ def create_car(car):
 def create_dealer(dealer):
     existing_dealer = get_dealer(dealer.dealer_code)
     if (existing_dealer == None):
-        db.session.add(dealer)
-        db.session.commit()
+        try:
+            db.session.add(dealer)
+            db.session.commit()
+            cache.delete_memoized(__get_dealers_from_db__)
+        except IntegrityError as e:
+            print(f"Error creating dealer {e}")
+            db.session.rollback()
     return dealer
 
 
@@ -36,10 +41,6 @@ def create_car_model(car_model):
 
 def get_cars():
     return __get_cars_from_db__()
-
-@cache.memoize()
-def __get_cars_from_db__():
-    return Car.query.order_by(Car.created_date.desc()).all()
 
 
 def get_car(vin):
@@ -63,10 +64,21 @@ def get_latest_car():
 
 
 def get_dealers():
-    dealers = Dealer.query.order_by('dealer_code').all()
-    return dealers
+    return __get_dealers_from_db__()
 
 
 def get_dealer_cars(dealer_code):
     cars = Car.query.filter_by(ship_to=dealer_code).all()
     return cars
+
+
+@cache.memoize()
+def __get_dealers_from_db__():
+    dealers = Dealer.query.order_by('dealer_code').all()
+    return dealers
+
+
+@cache.memoize()
+def __get_cars_from_db__():
+    return Car.query.order_by(Car.created_date.desc()).all()
+
