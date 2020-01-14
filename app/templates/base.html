@@ -25,15 +25,29 @@
     {% else %}
         <title>Telluride Lookup</title>
     {% endif %}
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-156190993-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-156190993-1');
+    </script>
+
 </head>
 <body>
 <ul class="nav nav-tabs bg-dark">
-  <li class="nav-item">
-    <a class="nav-link" href="/">Cars</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="{{ url_for("webapp.dealers") }}">Dealers</a>
-  </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/">Cars</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ url_for("webapp.dealers") }}">Dealers</a>
+    </li>
 </ul>
 <main role="main" class="container">
     {% block content %}{% endblock %}
