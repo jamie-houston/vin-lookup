@@ -40,7 +40,6 @@ def init_caching(app):
     else:
         cache_user = os.environ.get('MEMCACHIER_USERNAME') or ''
         cache_pass = os.environ.get('MEMCACHIER_PASSWORD') or ''
-        cache.init_app(app,{'CACHE_TYPE': 'memcached'})
         cache.init_app(app,
                        config={'CACHE_TYPE': 'saslmemcached',
                                'CACHE_MEMCACHED_SERVERS': cache_servers.split(','),
