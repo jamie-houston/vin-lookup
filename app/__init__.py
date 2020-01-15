@@ -34,7 +34,7 @@ def create_app(config_name):
 
 
 def init_caching(app):
-    redis_url = os.environ.get('REDISCLOUD_URL')
+    redis_url = os.getenv("REDISCLOUD_URL")
     if redis_url == None:
         cache.init_app(app, config={'CACHE_TYPE': 'simple'})
     else:
