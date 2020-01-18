@@ -6,6 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 from config import app_config
 from flask_caching import Cache
 from flask_moment import Moment
+from flask_cache_buster import CacheBuster
 
 db = SQLAlchemy()
 ma = Marshmallow()
@@ -34,6 +35,16 @@ def create_app(config_name):
 
 
 def init_caching(app):
+    # add versioning to client-side files
+    client_cache_config = {
+        'extensions': ['.js', '.css'],
+        'hash_size': 10
+    }
+
+    cache_buster = CacheBuster(config=client_cache_config)
+    cache_buster.register_cache_buster(app)
+
+    # Use redis for server side caching
     redis_url = os.getenv("REDISCLOUD_URL")
     if redis_url == None:
         cache.init_app(app, config={'CACHE_TYPE': 'simple'})

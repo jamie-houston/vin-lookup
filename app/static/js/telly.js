@@ -56,3 +56,18 @@ function formatModel(value, row, index) {
 function formatDate(value, row, index){
     return moment(value).format('L');
 }
+
+function formatInteriorColor(value, row, index){
+    switch (row.opt_code){
+        case "012":
+        case "017":
+            return "BUTTERSCOTCH";
+        case "022":
+        case "027":
+            return "DUNE BROWN";
+        default:
+            return value;
+
+    }
+    return value;
+}
