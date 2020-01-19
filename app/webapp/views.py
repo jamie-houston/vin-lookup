@@ -10,6 +10,13 @@ def index():
     return render_template("cars.html")
 
 
+@webapp.route('/mobile')
+@cache.cached(timeout=500)
+def mobile():
+    cars = repository.get_cars()
+    return render_template("mobile.html", cars=cars)
+
+
 @webapp.route('/car/<vin>')
 def car_info(vin):
     car = repository.get_car(vin)

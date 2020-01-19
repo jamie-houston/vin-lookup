@@ -27,11 +27,12 @@
                 <thead>
                 <tr>
                     <th data-field="vin" data-formatter="formatVin">VIN</th>
-                    <th data-field="title" data-sortable="true">Name</th>
                     <th data-field="model" data-sortable="true">Model</th>
+                    <th data-field="opt_code" data-sortable="true" data-formatter="formatOptions">Options</th>
+                    <th data-field="model" data-sortable="true">Description</th>
                     <th data-field="ext_color" data-sortable="true">Ext Color</th>
-                    <th data-field="int_color" data-sortable="true">Int Color</th>
-                    <th data-field="created_date" data-sortable="true">Created</th>
+                    <th data-field="int_color" data-sortable="true" data-formatter="formatInteriorColor">Int Color</th>
+                    <th data-field="created_date" data-sortable="true" data-formatter="formatDate" >Created</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -39,6 +40,7 @@
                     <tr>
                         <td>{{ car.vin }}</td>
                         <td>{{ car.car_model }}</td>
+                        <td>{{ car.opt_code }}</td>
                         <td>{{ car.model_info.description }}</td>
                         <td>{{ car.ext_color }}</td>
                         <td>{{ car.int_color }}</td>

@@ -10,7 +10,6 @@
                    data-sort-name="id"
                    data-click-to-select="true"
                    data-filter-control="true"
-                   data-url="/api/cars"
             >
                 <thead>
                 <tr>
@@ -24,6 +23,17 @@
                 </tr>
                 </thead>
                 <tbody>
+                {% for car in cars %}
+                    <tr>
+                        <td>{{ car.vin }}</td>
+                        <td>{{ car.car_model }}</td>
+                        <td>{{ car.opt_code }}</td>
+                        <td>{{ car.ext_color }}</td>
+                        <td>{{ car.int_color }}</td>
+                        <td>{{ car.sold_to }}</td>
+                        <td>{{ car.created_date }}</td>
+                    </tr>
+                {% endfor %}
                 </tbody>
             </table>
         </div>
