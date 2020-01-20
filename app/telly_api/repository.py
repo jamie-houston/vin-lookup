@@ -1,5 +1,6 @@
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.sql.expression import func
+from sqlalchemy.sql import text
 from app.models import Car, Dealer, CarModel
 from app import db, cache
 
@@ -39,14 +40,18 @@ def create_car_model(car_model):
     return car_model
 
 
-def get_cars(args={}):
+def get_car_list(args={}):
     search = args.get("search")
     sort = args.get("sort")
-    order = args.get("order")
-    offset = args.get("offset", 0)
-    limit = args.get("limit", 10)
-    # return __get_cars_from_db__().paginate(offset, limit).all()
-    return Car.query.paginate(0, 10).all()
+    order = args.get("order", 'created_date')
+    offset = args.get("offset", 0, type=int)
+    limit = args.get("limit", 10, type=int)
+    page = 1 if offset == 0 else offset / limit + 1
+    return Car.query.order_by(text(f'{sort} {order}')).paginate(page, limit).items
+
+
+def get_cars():
+    return __get_cars_from_db__()
 
 
 def get_car(vin):
@@ -84,6 +89,6 @@ def __get_dealers_from_db__():
     return dealers
 
 
-# @cache.memoize()
+@cache.memoize()
 def __get_cars_from_db__():
-    return Car.query.order_by(Car.created_date.desc())
+    return Car.query.order_by(Car.created_date.desc()).all()
