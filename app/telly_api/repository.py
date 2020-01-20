@@ -65,8 +65,8 @@ def get_model(model_code):
 
 
 def get_latest_car():
-    max_id = db.session.query(func.max(Car.id)).first()
-    return Car.query.filter_by(id=max_id).first()
+    max_date = db.session.query(func.max(Car.created_date)).first()
+    return Car.query.filter_by(created_date=max_date).first()
 
 
 def get_dealers():
