@@ -39,8 +39,14 @@ def create_car_model(car_model):
     return car_model
 
 
-def get_cars():
-    return __get_cars_from_db__()
+def get_cars(args={}):
+    search = args.get("search")
+    sort = args.get("sort")
+    order = args.get("order")
+    offset = args.get("offset", 0)
+    limit = args.get("limit", 10)
+    # return __get_cars_from_db__().paginate(offset, limit).all()
+    return Car.query.paginate(0, 10).all()
 
 
 def get_car(vin):
@@ -49,7 +55,7 @@ def get_car(vin):
 
 
 def get_dealer(dealer_code):
-    dealer = Dealer.query.filter_by(dealer_code = dealer_code).first()
+    dealer = Dealer.query.filter_by(dealer_code=dealer_code).first()
     return dealer
 
 
@@ -78,7 +84,6 @@ def __get_dealers_from_db__():
     return dealers
 
 
-@cache.memoize()
+# @cache.memoize()
 def __get_cars_from_db__():
-    return Car.query.order_by(Car.created_date.desc()).all()
-
+    return Car.query.order_by(Car.created_date.desc())

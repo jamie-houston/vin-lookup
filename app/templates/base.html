@@ -38,7 +38,6 @@
 
         gtag('config', 'UA-156190993-1');
     </script>
-    {{ moment.include_moment() }}
 
 </head>
 <body>
@@ -70,9 +69,11 @@
 <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
 <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
 
+
 <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js"
         integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9"
         crossorigin="anonymous"></script>
 <script src="{{ url_for('static', filename='js/telly.js') }}"></script>
 <script src="{{ url_for('static', filename='js/table.js') }}"></script>
+{{ moment.include_moment() }}
 </html>
