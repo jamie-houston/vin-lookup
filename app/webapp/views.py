@@ -10,6 +10,12 @@ def index():
     return render_template("cars.html")
 
 
+@webapp.route('/other')
+@cache.cached(timeout=500)
+def other():
+    return render_template("other.html")
+
+
 @webapp.route('/mobile')
 @cache.cached(timeout=500)
 def mobile():

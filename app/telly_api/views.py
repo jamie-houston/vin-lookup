@@ -18,6 +18,17 @@ def add_car(vin):
 
 
 # endpoint to show all cars
+@telly_api.route("/api/car_list", methods=["GET"])
+def get_car_list():
+    all_cars = repository.get_car_list(request.args)
+    total = len(repository.get_cars())
+
+    result = cars_schema.dump(all_cars)
+
+    return jsonify({'total': total, 'rows': result})
+
+
+# endpoint to show all cars
 @telly_api.route("/api/cars", methods=["GET"])
 def get_cars():
     all_cars = repository.get_cars()
