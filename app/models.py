@@ -8,6 +8,7 @@ class Car(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     vin = db.Column(db.String())
+    serial_number = db.Column(db.Integer)
     ext_color = db.Column(db.String())
     int_color = db.Column(db.String())
     car_model = db.Column(db.String(), db.ForeignKey('car_models.model_code'))
@@ -24,6 +25,7 @@ class Car(db.Model):
         self.opt_code = opt_code
         self.sold_to = sold_to
         self.ship_to = ship_to
+        self.serial_number = vin[len(vin)-6:]
 
     def __repr__(self):
         return '<id {}>'.format(self.id)
@@ -90,6 +92,19 @@ class CarModel(db.Model):
             'model_code': self.dealer_code,
             'description': self.address
         }
+
+
+class ScraperLog(db.Model):
+    __tablename__ = "scraper_logs"
+
+    id = db.Column(db.Integer, primary_key=True)
+    found_cars = db.Column(db.Integer)
+    run_start = db.Column(db.DateTime)
+    run_end = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+
+    def __init__(self, found_cars, run_start):
+        self.found_cars = found_cars
+        self.run_start = run_start
 
 
 class CarSchema(ma.Schema):

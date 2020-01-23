@@ -58,3 +58,9 @@ def get_dealers():
     result = dealers_schema.dump(dealers)
 
     return jsonify(result)
+
+
+@telly_api.route("/api/batch/<int:batch_size>")
+def run_batch(batch_size):
+    stats = vin_service.get_next_batch(batch_size)
+    return jsonify(stats)

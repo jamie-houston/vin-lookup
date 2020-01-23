@@ -1,7 +1,7 @@
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.sql.expression import func
 from sqlalchemy.sql import text
-from app.models import Car, Dealer, CarModel
+from app.models import Car, Dealer, CarModel, ScraperLog
 from app import db, cache
 
 
@@ -83,6 +83,11 @@ def get_dealer_cars(dealer_code):
     return cars
 
 
+def log_scraper_run(found_cars, run_start):
+    db.session.add(ScraperLog(found_cars, run_start))
+    db.session.commit()
+
+
 @cache.memoize()
 def __get_dealers_from_db__():
     dealers = Dealer.query.order_by('dealer_code').all()
@@ -92,3 +97,5 @@ def __get_dealers_from_db__():
 @cache.memoize()
 def __get_cars_from_db__():
     return Car.query.order_by(Car.created_date.desc()).all()
+
+
