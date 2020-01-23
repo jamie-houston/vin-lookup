@@ -101,10 +101,12 @@ class ScraperLog(db.Model):
     found_cars = db.Column(db.Integer)
     run_start = db.Column(db.DateTime)
     run_end = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+    success = db.Column(db.Boolean)
 
-    def __init__(self, found_cars, run_start):
+    def __init__(self, found_cars, run_start, success):
         self.found_cars = found_cars
         self.run_start = run_start
+        self.success = success
 
 
 class CarSchema(ma.Schema):

@@ -83,8 +83,8 @@ def get_dealer_cars(dealer_code):
     return cars
 
 
-def log_scraper_run(found_cars, run_start):
-    db.session.add(ScraperLog(found_cars, run_start))
+def log_scraper_run(found_cars, run_start, success=True):
+    db.session.add(ScraperLog(found_cars, run_start, success))
     db.session.commit()
 
 
@@ -97,5 +97,3 @@ def __get_dealers_from_db__():
 @cache.memoize()
 def __get_cars_from_db__():
     return Car.query.order_by(Car.created_date.desc()).all()
-
-
