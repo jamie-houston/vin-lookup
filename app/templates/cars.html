@@ -28,4 +28,7 @@
             </table>
         </div>
     </div>
+    <div>
+        Last update added <b>{{ scraper_log.found_cars }} VINs</b> {{ moment(scraper_log.run_end).fromNow() }}
+    </div>
 {% endblock %}
