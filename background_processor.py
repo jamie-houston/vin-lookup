@@ -1,4 +1,3 @@
-import datetime
 import os
 from apscheduler.schedulers.blocking import BlockingScheduler
 from app.telly_api import repository, vin_service
@@ -13,7 +12,6 @@ def update_cars():
     try:
         scraping_enabled = os.getenv("ENABLE_SCRAPING", False)
         batch_size = os.getenv("SCRAPER_BATCH_SIZE", 100)
-        run_start = datetime.utcnow()
         if scraping_enabled != 'True':
             print("scraping not enabled")
         else:
@@ -24,7 +22,6 @@ def update_cars():
             vin_service.get_next_batch(batch_size)
     except Exception as e:
         print(f"Error scraping: {e}")
-        repository.log_scraper_run(0, run_start, False)
 
 
 
