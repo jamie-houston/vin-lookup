@@ -6,12 +6,12 @@ from app import create_app
 sched = BlockingScheduler()
 
 
-@sched.scheduled_job('interval', minutes=5)
+@sched.scheduled_job('interval', minutes=10)
 def update_cars():
     print("Starting scraper")
     try:
         scraping_enabled = os.getenv("ENABLE_SCRAPING", False)
-        batch_size = os.getenv("SCRAPER_BATCH_SIZE", 100)
+        batch_size = int(os.getenv("SCRAPER_BATCH_SIZE", 100))
         if scraping_enabled != 'True':
             print("scraping not enabled")
         else:
