@@ -40,7 +40,8 @@ def get_cars():
 
 @telly_api.route("/api/update", methods=["GET"])
 def update_cars():
-    next_car = vin_service.get_next_car()
+    previous_car = repository.get_latest_car()
+    next_car = vin_service.get_next_car(previous_car.vin)
 
     result = car_schema.dump(next_car)
     return jsonify(result)

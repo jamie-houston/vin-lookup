@@ -1,20 +1,20 @@
 import os
 from apscheduler.schedulers.blocking import BlockingScheduler
-from app.telly_api import repository, vin_service
+from app.telly_api import vin_service
 from app import create_app
 
 sched = BlockingScheduler()
 
 
-@sched.scheduled_job('interval', minutes=10)
+@sched.scheduled_job('interval', minutes=60)
 def update_cars():
     print("Starting scraper")
     try:
         scraping_enabled = os.getenv("ENABLE_SCRAPING", False)
-        batch_size = int(os.getenv("SCRAPER_BATCH_SIZE", 100))
         if scraping_enabled != 'True':
             print("scraping not enabled")
         else:
+            batch_size = int(os.getenv("SCRAPER_BATCH_SIZE", 100))
             print(f"Scraping with batch size {batch_size}")
             config_name = os.getenv('FLASK_CONFIG')
             app = create_app(config_name)

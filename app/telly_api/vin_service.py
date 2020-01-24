@@ -1,34 +1,43 @@
 import datetime
+
+from PyPDF2.utils import PdfReadError
+
 from app.telly_api import repository, vin_lookup, vin_generator
+from result import Ok, Err
+
+# Check next 200 possible vins (for international vins that won't be returned
+RETRY_COUNT = 200
 
 
 def get_next_batch(batch_size):
     run_start = datetime.datetime.utcnow()
     found = 0
-    next_car = None
+    last_vin = repository.get_latest_car().vin
     print(f"running batch of {batch_size}")
-    while next_car is not {} and found < batch_size:
+    while found < batch_size:
         print(f"Getting car {found}")
-        next_car = get_next_car()
+        result = get_next_car(last_vin)
+        if result.is_err():
+            break
+        last_vin = result.value.vin
         found += 1
 
     repository.log_scraper_run(found, run_start)
     return {'found': found, 'start': run_start, 'end': datetime.datetime.utcnow()}
 
 
-def get_next_car():
-    previous_car = repository.get_latest_car()
-    next_car = None
-    last_vin = previous_car.vin
+def get_next_car(last_vin):
     retries = 0
-    # Check next 200 possible vins (for international vins that won't be returned
-    while next_car == None and retries < 200:
+    while retries < RETRY_COUNT:
         next_vins = vin_generator.get_next_vin(last_vin)
-        next_car = __find_vin__(next_car, next_vins)
+        result = __find_vin__(next_vins)
+        if result.is_ok():
+            return result
+
         last_vin = next_vins[0]
         retries += 1
 
-    return next_car or {}
+    return Err("No more vins")
 
 
 def scrape_vin(vin):
@@ -39,15 +48,15 @@ def scrape_vin(vin):
     return car
 
 
-def __find_vin__(next_car, next_vins):
+def __find_vin__(next_vins):
     for vin_number in next_vins:
         print(f"trying {vin_number}")
         try:
             next_car = scrape_vin(vin_number)
             print(f"found {next_car.vin}")
-            break
-        except:
+            return Ok(next_car)
+        except PdfReadError as e:
             print("not found")
-    return next_car
+    return Err("No results for vin")
 
 
