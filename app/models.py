@@ -112,7 +112,7 @@ class ScraperLog(db.Model):
 class CarSchema(ma.Schema):
     class Meta:
         # Fields to expose
-        fields = ('id', 'vin', 'ext_color', 'int_color', 'car_model', 'opt_code', 'sold_to', 'ship_tp', 'created_date')
+        fields = ('id', 'vin', 'ext_color', 'int_color', 'car_model', 'opt_code', 'sold_to', 'ship_tp', 'created_date', 'serial_number')
 
 
 class DealerSchema(ma.Schema):
