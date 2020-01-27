@@ -3,6 +3,7 @@ from sqlalchemy.sql.expression import func
 from sqlalchemy.sql import text
 from app.models import Car, Dealer, CarModel, ScraperLog
 from app import db, cache
+from datetime import datetime, timedelta
 
 
 def create_car(car):
@@ -86,6 +87,15 @@ def get_dealer_cars(dealer_code):
 def log_scraper_run(found_cars, run_start, success=True):
     db.session.add(ScraperLog(found_cars, run_start, success))
     db.session.commit()
+
+
+def get_scraper_stats():
+    start_date = datetime.utcnow() + timedelta(days=-1)
+    q = db.session.query(Car).filter(Car.created_date >= start_date)
+    count_q = q.statement.with_only_columns([func.count()]).order_by(None)
+    count = q.session.execute(count_q).scalar()
+    scraper_log = ScraperLog.query.order_by(ScraperLog.run_end.desc()).first()
+    return {'start_date': start_date, 'count': count, 'last_run': scraper_log.run_end, 'last_count': scraper_log.found_cars}
 
 
 @cache.memoize()

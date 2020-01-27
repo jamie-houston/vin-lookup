@@ -11,6 +11,11 @@
                    data-sort-order="desc"
                    data-filter-control="true"
                    data-url="/api/cars"
+                   data-show-fullscreen="true"
+                   data-cookie="true"
+                   data-cookie-id-table="saveId"
+                   data-show-export="true"
+
             >
                 <thead>
                 <tr>
@@ -29,6 +34,6 @@
         </div>
     </div>
     <div>
-        Last update added <b>{{ scraper_log.found_cars }} VINs</b> {{ moment(scraper_log.run_end).fromNow() }}
+        Last update added {{ scraper_stats.last_count }} VINs {{ moment(scraper_stats.last_run).fromNow() }}. {{ scraper_stats.count }} VINS added in the last 24 hours.
     </div>
 {% endblock %}

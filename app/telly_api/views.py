@@ -13,8 +13,9 @@ dealers_schema = DealerSchema(many=True)
 @telly_api.route("/api/<vin>", methods=["GET"])
 def add_car(vin):
     car = vin_service.scrape_vin(vin)
+    result = car_schema.dump(car)
 
-    return jsonify({'id': car.id, 'vin': car.vin})
+    return jsonify(result)
 
 
 # endpoint to show all cars
@@ -64,4 +65,10 @@ def get_dealers():
 @telly_api.route("/api/batch/<int:batch_size>")
 def run_batch(batch_size):
     stats = vin_service.get_next_batch(batch_size)
+    return jsonify(stats)
+
+
+@telly_api.route("/api/stats")
+def scraper_stats():
+    stats = repository.get_scraper_stats()
     return jsonify(stats)
