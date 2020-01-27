@@ -1,7 +1,6 @@
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.sql.expression import func
 from sqlalchemy.sql import text
-from sqlalchemy import select
 from app.models import Car, Dealer, CarModel, ScraperLog
 from app import db, cache
 from datetime import datetime, timedelta

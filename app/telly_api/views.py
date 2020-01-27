@@ -68,7 +68,7 @@ def run_batch(batch_size):
     return jsonify(stats)
 
 
-@telly_api.route("/stats")
+@telly_api.route("/api/stats")
 def scraper_stats():
     stats = repository.get_scraper_stats()
     return jsonify(stats)

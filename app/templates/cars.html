@@ -34,6 +34,6 @@
         </div>
     </div>
     <div>
-        Last update added <b>{{ scraper_stats.last_count }} VINs</b> {{ moment(scraper_stats.last_run).fromNow() }}.  <b>{{ scraper_stats.count }}</b> VINS added in the last 24 hours.
+        Last update added {{ scraper_stats.last_count }} VINs {{ moment(scraper_stats.last_run).fromNow() }}. {{ scraper_stats.count }} VINS added in the last 24 hours.
     </div>
 {% endblock %}
