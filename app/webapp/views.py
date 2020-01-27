@@ -2,14 +2,13 @@ from flask import render_template
 from app.telly_api import repository
 from . import webapp
 from app import cache
-from app.models import ScraperLog
 
 
 @webapp.route('/')
-@cache.cached(timeout=50)
+@cache.cached(timeout=60)
 def index():
-    scraper_log = ScraperLog.query.order_by(ScraperLog.run_end.desc()).first()
-    return render_template("cars.html", scraper_log=scraper_log)
+    scraper_stats = repository.get_scraper_stats()
+    return render_template("cars.html", scraper_stats=scraper_stats)
 
 
 @webapp.route('/other')
@@ -41,6 +40,6 @@ def dealer_info(dealer_code):
 
 
 @webapp.route('/dealers')
-@cache.cached(timeout=50)
+@cache.cached(timeout=60)
 def dealers():
     return render_template("dealers.html")

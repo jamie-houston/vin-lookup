@@ -1,9 +1,10 @@
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.sql.expression import func
 from sqlalchemy.sql import text
+from sqlalchemy import select
 from app.models import Car, Dealer, CarModel, ScraperLog
 from app import db, cache
-import datetime
+from datetime import datetime, timedelta
 
 
 def create_car(car):
@@ -90,9 +91,12 @@ def log_scraper_run(found_cars, run_start, success=True):
 
 
 def get_scraper_stats():
-    start_date = datetime.datetime.utcnow()
-    recent_car_count = func.count(Car.query.filter_by(Car.created_date > start_date))
-    return {'start_date': start_date, 'count': recent_car_count}
+    start_date = datetime.utcnow() + timedelta(days=-1)
+    q = db.session.query(Car).filter(Car.created_date >= start_date)
+    count_q = q.statement.with_only_columns([func.count()]).order_by(None)
+    count = q.session.execute(count_q).scalar()
+    scraper_log = ScraperLog.query.order_by(ScraperLog.run_end.desc()).first()
+    return {'start_date': start_date, 'count': count, 'last_run': scraper_log.run_end, 'last_count': scraper_log.found_cars}
 
 
 @cache.memoize()

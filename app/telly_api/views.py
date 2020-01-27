@@ -66,3 +66,9 @@ def get_dealers():
 def run_batch(batch_size):
     stats = vin_service.get_next_batch(batch_size)
     return jsonify(stats)
+
+
+@telly_api.route("/stats")
+def scraper_stats():
+    stats = repository.get_scraper_stats()
+    return jsonify(stats)
