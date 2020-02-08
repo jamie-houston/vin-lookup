@@ -18,7 +18,7 @@ function formatOptions(value, row, index) {
             return "T";
         case "015":
             var model = row.car_model;
-            if (model === "J4482" || model === "J4282") {
+            if (["J4482", "J4282", "J4442", "J4242"].indexOf(model) > 0) {
                 return "T";
             }
         default:

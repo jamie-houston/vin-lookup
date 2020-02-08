@@ -72,3 +72,9 @@ def run_batch(batch_size):
 def scraper_stats():
     stats = repository.get_scraper_stats()
     return jsonify(stats)
+
+
+@telly_api.route("/api/missing")
+def find_missing():
+    result = vin_service.find_missing_cars()
+    return jsonify(result)

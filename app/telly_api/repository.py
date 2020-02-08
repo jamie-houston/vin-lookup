@@ -98,6 +98,17 @@ def get_scraper_stats():
     return {'start_date': start_date, 'count': count, 'last_run': scraper_log.run_end, 'last_count': scraper_log.found_cars}
 
 
+def get_missing_serials():
+    all_serials = Car.query.filter(Car.serial_number.isnot(None)).with_entities(Car.serial_number).order_by(text('serial_number asc')).all()
+    last = all_serials[len(all_serials)-1].serial_number
+    missing = []
+    for serial in all_serials:
+        if serial.serial_number > last + 1:
+            missing += (range(last+1, serial.serial_number))
+        last = serial.serial_number
+    return missing
+
+
 @cache.memoize()
 def __get_dealers_from_db__():
     dealers = Dealer.query.order_by('dealer_code').all()

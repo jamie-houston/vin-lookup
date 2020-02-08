@@ -19,15 +19,17 @@ class VinYear:
 
 
 def get_next_vin(previous_vin):
+    serial_number = int(previous_vin[11:]) + 1
+    return get_next_vin_by_serial(serial_number)
+
+
+def get_next_vin_by_serial(serial_number):
     results = []
     char = get_random_vin_char()
-    vin_end = int(previous_vin[11:]) + 1
     vin_combos = get_possible_vins_starts()
     for combo in vin_combos:
         vin_year = VinYear(combo, VIN_YEAR)
-
-        v = f'{vin_year.First8}{char}{vin_year.Year}G{vin_end:06}'
-
+        v = f'{vin_year.First8}{char}{vin_year.Year}G{serial_number:06}'
         check_char = get_check_sum_char(v)
         results.append("%s%s%s" % (v[0:8], check_char, v[9:]))
     return results

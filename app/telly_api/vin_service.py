@@ -9,6 +9,22 @@ from result import Ok, Err
 RETRY_COUNT = 200
 
 
+def find_missing_cars():
+    run_start = datetime.datetime.utcnow()
+    missing_serials = repository.get_missing_serials()
+    retries = 0
+    found = []
+    while retries < len(missing_serials):
+        vins = vin_generator.get_next_vin_by_serial(missing_serials[retries])
+        result = __find_vin__(vins)
+        if result.is_ok():
+            found.append(result.value.vin)
+        retries += 1
+
+    repository.log_scraper_run(found, run_start)
+    return found
+
+
 def get_next_batch(batch_size):
     run_start = datetime.datetime.utcnow()
     found = 0

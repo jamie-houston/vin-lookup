@@ -24,5 +24,13 @@ def update_cars():
         print(f"Error scraping: {e}")
 
 
+@sched.scheduled_job('cron', day_of_week='mon-fri', hour=21)
+def update_missing_cars():
+    print("starting find missing cars")
+    try:
+        vin_service.find_missing_cars()
+    except Exception as e:
+        print(f"Error scraping: {e}")
+
 
 sched.start()
