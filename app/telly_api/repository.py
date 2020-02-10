@@ -4,6 +4,7 @@ from sqlalchemy.sql import text
 from app.models import Car, Dealer, CarModel, ScraperLog
 from app import db, cache
 from datetime import datetime, timedelta
+import time
 
 
 def create_car(car):
@@ -84,8 +85,8 @@ def get_dealer_cars(dealer_code):
     return cars
 
 
-def log_scraper_run(found_cars, run_start, success=True):
-    db.session.add(ScraperLog(found_cars, run_start, success))
+def log_scraper_run(found_cars, run_start, run_type, success=True):
+    db.session.add(ScraperLog(found_cars, run_start, run_type, success))
     db.session.commit()
 
 
@@ -95,16 +96,29 @@ def get_scraper_stats():
     count_q = q.statement.with_only_columns([func.count()]).order_by(None)
     count = q.session.execute(count_q).scalar()
     scraper_log = ScraperLog.query.order_by(ScraperLog.run_end.desc()).first()
-    return {'start_date': start_date, 'count': count, 'last_run': scraper_log.run_end, 'last_count': scraper_log.found_cars}
+    return {'start_date': start_date, 'count': count, 'last_run': scraper_log.run_end,
+            'last_count': scraper_log.found_cars}
+
+
+def update_serial_numbers():
+    start = time.time()
+    missing_serials = Car.query.filter_by(serial_number=None).limit(1000).all()
+    for missing in missing_serials:
+        missing.serial_number = missing.vin[len(missing.vin) - 6:]
+    db.session.commit()
+    end = time.time()
+    return start - end
 
 
 def get_missing_serials():
-    all_serials = Car.query.filter(Car.serial_number.isnot(None)).with_entities(Car.serial_number).order_by(text('serial_number asc')).all()
-    last = all_serials[len(all_serials)-1].serial_number
+    # TODO: Only go back 2 weeks
+    all_serials = Car.query.filter(Car.serial_number.isnot(None)).with_entities(Car.serial_number).order_by(
+        text('serial_number asc')).all()
+    last = all_serials[len(all_serials) - 1].serial_number
     missing = []
     for serial in all_serials:
         if serial.serial_number > last + 1:
-            missing += (range(last+1, serial.serial_number))
+            missing += (range(last + 1, serial.serial_number))
         last = serial.serial_number
     return missing
 

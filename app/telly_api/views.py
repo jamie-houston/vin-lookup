@@ -74,7 +74,19 @@ def scraper_stats():
     return jsonify(stats)
 
 
-@telly_api.route("/api/missing")
-def find_missing():
-    result = vin_service.find_missing_cars()
+@telly_api.route("/api/missingcount")
+def missing_count():
+    result = repository.get_missing_serials()
+    return jsonify(len(result))
+
+
+@telly_api.route("/api/missing/<int:start>")
+def find_missing(start):
+    result = vin_service.find_missing_cars(start)
+    return jsonify(result)
+
+
+@telly_api.route("/api/fix")
+def fix_serial():
+    result = repository.update_serial_numbers()
     return jsonify(result)
