@@ -24,7 +24,7 @@ def update_cars():
         print(f"Error scraping: {e}")
 
 
-@sched.scheduled_job('interval', minutes='30')
+@sched.scheduled_job('interval', minutes=30)
 def update_missing_cars():
     try:
         start = os.getenv("MISSING_START", 0)
