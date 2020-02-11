@@ -30,6 +30,9 @@ def update_missing_cars():
         start = os.getenv("MISSING_START", 0)
         limit = os.getenv("MISSING_LIMIT", 100)
         print(f'searching missing from {start} limit {limit}')
+        config_name = os.getenv('FLASK_CONFIG')
+        app = create_app(config_name)
+        app.app_context().push()
         vin_service.find_missing_cars(start, limit)
     except Exception as e:
         print(f"Error scraping: {e}")
