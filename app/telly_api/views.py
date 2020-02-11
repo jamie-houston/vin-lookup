@@ -80,9 +80,7 @@ def missing_count():
     return jsonify(len(result))
 
 
-@telly_api.route("/api/missing/<int:start>")
-def find_missing(start):
-    result = vin_service.find_missing_cars(start)
+@telly_api.route("/api/missing/<int:start>/<int:limit>")
+def find_missing(start,limit):
+    result = vin_service.find_missing_cars(start, limit)
     return jsonify(result)
-
-
