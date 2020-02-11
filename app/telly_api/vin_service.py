@@ -9,7 +9,7 @@ from result import Ok, Err
 RETRY_COUNT = 200
 
 
-def find_missing_cars(start=0, limit=10):
+def find_missing_cars(start=0, limit=50):
     run_start = datetime.datetime.utcnow()
     missing_serials = repository.get_missing_serials()
     retries = start

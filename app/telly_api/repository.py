@@ -100,16 +100,6 @@ def get_scraper_stats():
             'last_count': scraper_log.found_cars}
 
 
-def update_serial_numbers():
-    start = time.time()
-    missing_serials = Car.query.filter_by(serial_number=None).limit(1000).all()
-    for missing in missing_serials:
-        missing.serial_number = missing.vin[len(missing.vin) - 6:]
-    db.session.commit()
-    end = time.time()
-    return start - end
-
-
 def get_missing_serials():
     # TODO: Only go back 2 weeks
     all_serials = Car.query.filter(Car.serial_number.isnot(None)).with_entities(Car.serial_number).order_by(

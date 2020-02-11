@@ -86,7 +86,3 @@ def find_missing(start):
     return jsonify(result)
 
 
-@telly_api.route("/api/fix")
-def fix_serial():
-    result = repository.update_serial_numbers()
-    return jsonify(result)
