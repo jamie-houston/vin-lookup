@@ -24,11 +24,11 @@ def update_cars():
         print(f"Error scraping: {e}")
 
 
-@sched.scheduled_job('interval', minutes=30)
+@sched.scheduled_job('interval', minutes=180)
 def update_missing_cars():
     try:
-        start = os.getenv("MISSING_START", 0)
-        limit = os.getenv("MISSING_LIMIT", 100)
+        start = int(os.getenv("MISSING_START", 0))
+        limit = int(os.getenv("MISSING_LIMIT", 100))
         print(f'searching missing from {start} limit {limit}')
         config_name = os.getenv('FLASK_CONFIG')
         app = create_app(config_name)
