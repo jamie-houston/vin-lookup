@@ -6,7 +6,7 @@ from app import create_app
 sched = BlockingScheduler()
 
 
-@sched.scheduled_job('interval', minutes=60)
+@sched.scheduled_job('interval', minutes=30)
 def update_cars():
     print("Starting scraper")
     try:
