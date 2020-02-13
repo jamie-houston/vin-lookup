@@ -20,19 +20,21 @@
                    data-search="true"
                    data-show-toggle="true"
                    data-pagination="true"
-                   data-sort-name="id"
+                   data-sort-name="created_date"
+                   data-sort-order="desc"
                    data-id-field="id"
+                   data-filter-control="true"
                    data-click-to-select="true"
             >
                 <thead>
                 <tr>
-                    <th data-field="vin" data-formatter="formatVin">VIN</th>
-                    <th data-field="car_model" data-sortable="true">Model</th>
-                    <th data-field="opt_code" data-sortable="true" data-formatter="formatOptions">Options</th>
-                    <th data-field="model" data-sortable="true">Description</th>
-                    <th data-field="ext_color" data-sortable="true">Ext Color</th>
-                    <th data-field="int_color" data-sortable="true" data-formatter="formatInteriorColor">Int Color</th>
-                    <th data-field="created_date" data-sortable="true" data-formatter="formatDate" >Created</th>
+                    <th data-field="vin" data-formatter="formatVin" data-filter-control="input">VIN</th>
+                    <th data-field="car_model" data-sortable="true" data-filter-control="select">Model</th>
+                    <th data-field="opt_code" data-sortable="true" data-filter-control="select" data-formatter="formatOptions">Options</th>
+                    <th data-field="model" data-sortable="true" data-filter-control="select">Description</th>
+                    <th data-field="ext_color" data-sortable="true" data-filter-control="select">Ext Color</th>
+                    <th data-field="int_color" data-sortable="true" data-formatter="formatInteriorColor" data-filter-control="select">Int Color</th>
+                    <th data-field="created_date" data-sortable="true" data-formatter="formatDate" data-filter-control="input">Created</th>
                 </tr>
                 </thead>
                 <tbody>
