@@ -43,3 +43,8 @@ def dealer_info(dealer_code):
 @cache.cached(timeout=60)
 def dealers():
     return render_template("dealers.html")
+
+
+@webapp.route('/temp')
+def temp_route():
+    return render_template("temp.html")
