@@ -4,7 +4,7 @@ function getResult(x){
 
 function doIt(){
     var x = getResult(3);
-    console.log(x);
+    document.getElementById("result").innerText = x;
 }
 
 console.log(getResult(2));
