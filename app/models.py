@@ -32,6 +32,7 @@ class Car(db.Model):
 
     def serialize(self):
         return {
+            'serial_number': self.serial_number,
             'id': self.id,
             'vin': self.vin,
             'ext_color': self.ext_color,
@@ -42,6 +43,7 @@ class Car(db.Model):
             'ship_to': self.ship_to,
             'created_date': self.created_date
         }
+
 
 class Dealer(db.Model):
     __tablename__ = "dealers"

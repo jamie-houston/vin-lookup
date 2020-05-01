@@ -4,7 +4,6 @@ from sqlalchemy.sql import text
 from app.models import Car, Dealer, CarModel, ScraperLog
 from app import db, cache
 from datetime import datetime, timedelta
-import time
 
 
 def create_car(car):

@@ -7,7 +7,7 @@
                    data-show-columns="true"
                    data-search="true"
                    data-pagination="true"
-                   data-sort-name="created_date"
+                   data-sort-name="serial_number"
                    data-sort-order="desc"
                    data-filter-control="true"
                    data-show-fullscreen="true"
@@ -18,6 +18,7 @@
             >
                 <thead>
                 <tr>
+                    <th data-field="serial_number" data-sortable="true">Serial</th>
                     <th data-field="vin" data-filter-control="input" data-formatter="formatVin" data-filter-control-placeholder="search...">VIN</th>
                     <th data-field="car_model" data-filter-control="select" data-sortable="true" data-formatter="formatModel" data-filter-control-placeholder="filter...">Model</th>
                     <th data-field="opt_code" data-filter-control="select" data-sortable="true" data-formatter="formatOptions" data-filter-control-placeholder="filter...">Options</th>
@@ -30,6 +31,7 @@
                 <tbody>
                 {% for car in cars %}
                     <tr>
+                        <td>{{ car.serial_number }}</td>
                         <td>{{ car.vin }}</td>
                         <td>{{ car.car_model }}</td>
                         <td>{{ car.opt_code }}</td>
