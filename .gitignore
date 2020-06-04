@@ -162,7 +162,7 @@ fabric.properties
 
 # backup
 *.json
-*.dump*
+*.dump.*
 
 # os
 .DS_STORE
