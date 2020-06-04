@@ -1,3 +1,4 @@
+import os
 from flask import render_template
 from app.telly_api import repository
 from . import webapp
@@ -8,7 +9,8 @@ from app import cache
 @cache.cached(timeout=60)
 def index():
     scraper_stats = repository.get_scraper_stats()
-    return render_template("cars.html", scraper_stats=scraper_stats)
+    alert_message = os.getenv("ALERT_MESSAGE", None)
+    return render_template("cars.html", scraper_stats=scraper_stats, alert_message=alert_message)
 
 
 @webapp.route('/other')

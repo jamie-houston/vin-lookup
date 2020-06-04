@@ -58,6 +58,16 @@
 </ul>
 
 <main role="main" class="container">
+    {% if alert_message %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>
+                {{ alert_message|safe }}
+            </strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endif %}
     {% block content %}{% endblock %}
 </main>
 
@@ -75,7 +85,6 @@
 <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/extensions/cookie/bootstrap-table-cookie.min.js"></script>
 <script src="https://unpkg.com/tableexport.jquery.plugin/tableExport.min.js"></script>
 <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/extensions/export/bootstrap-table-export.js"></script>
-
 
 
 <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js"
