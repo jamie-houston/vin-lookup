@@ -14,11 +14,11 @@ Database is Postgres
 
 ### Setup the postgres database:
 
-> python manage.py db init
+> python run.py db init
 
-> python manage.py db migrate
+> python run.py db migrate
 
-> python manage.py db upgrade
+> python run.py db upgrade
 
 ### Import the data:
 
