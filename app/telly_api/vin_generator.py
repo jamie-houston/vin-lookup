@@ -1,6 +1,15 @@
 import random
 import itertools
 
+# Example 2020 Telluride - 5XYP6DHC0LG092308
+# https://vpic.nhtsa.dot.gov/mid/home/displayfile/7f5e483c-54f6-4733-8b08-5c154c3f15e9
+# 1-3 - Manufacturer
+# 4-8 - Vehicle Descriptor
+# 9 - Check digit
+# 10 - Year
+# 11 - Plant Code
+# 12-17 - Vehicle info
+
 VIN_DIGIT_POSITION_MULTIPLIER = [8, 7, 6, 5, 4, 3, 2, 10, 0, 9, 8, 7, 6, 5, 4, 3, 2]
 VIN_DIGIT_VALUES = {'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6, 'G': 7, 'H': 8, 'J': 1,
                   'K': 2, 'L': 3, 'M': 4, 'N': 5, 'P': 7, 'R': 9, 'S': 2, 'T': 3, 'U': 4, 'V': 5,

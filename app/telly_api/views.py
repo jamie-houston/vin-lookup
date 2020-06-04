@@ -3,11 +3,19 @@ from flask import request, jsonify
 from app.models import CarSchema, DealerSchema
 from . import telly_api
 from app.telly_api import repository, vin_generator, vin_service
+import requests
 
 car_schema = CarSchema()
 cars_schema = CarSchema(many=True)
 dealers_schema = DealerSchema(many=True)
 
+# endpoint to create new car
+@telly_api.route("/pdf/<vin>", methods=["GET"])
+def dump_pdf(vin):
+    url = f'https://www.kia.com/us/services/en/windowsticker/load/{vin}'
+    r = requests.get(url)
+
+    return r.content
 
 # endpoint to create new car
 @telly_api.route("/api/<vin>", methods=["GET"])
