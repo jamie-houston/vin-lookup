@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='images/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='images/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='images/favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ url_for('static', filename='images//site.webmanifest') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Material Design for Bootstrap fonts and icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/cached/fonts.css') }}"> -->
+
+    <!-- Material Design for Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/cached/bootstrap-material-design.min.css') }}"> -->
+    <link rel="stylesheet"
+          href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css"
+          integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+	<style>
+		.modal-backdrop.show {
+    opacity: .75;
+		}	
+	</style>
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css">
+
+    <link href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/telly.css') }}">
+    {% if title %}
+        <title>{{ title }}</title>
+    {% else %}
+        <title>Telluride Lookup</title>
+    {% endif %}
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-156190993-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-156190993-1');
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+        <script>
+                $(window).load(function()
+                        {
+                            $('#myModal').modal('show');
+                        });
+        </script>
+
+</head>
+<body>
+<ul class="nav nav-tabs bg-dark">
+    <li class="nav-item">
+        <a class="nav-link" href="/">Recent Cars</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/all">All Cars</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ url_for("webapp.dealers") }}">Dealers</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/mobile">Mobile</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="https://telly-stats.herokuapp.com/" target="_blank">Stats</a>
+    </li>
+        <li class="nav-item">
+        <a class="nav-link" href="/hof">Hall of Fame</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="https://paypal.me/thomaspgreene" target="_blank">Support Us</a>
+    </li>
+</ul>
+
+<main role="main" class="container">
+    {% block content %}{% endblock %}
+</main>
+
+</body>
+<!-- <script src="{{ url_for('static', filename='js/cached/jquery-3.3.1.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/cached/popper.js') }}"></script>
+<script src="{{ url_for('static', filename='js/cached/bootstrap-material-design.js') }}"></script>
+<script src="{{ url_for('static', filename='js/cached/bootstrap-table.min.js') }}"></script> -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+<script src="https://unpkg.com/popper.js@1.16.0/dist/umd/popper.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.16.0/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.16.0/dist/extensions/cookie/bootstrap-table-cookie.min.js"></script>
+<script src="https://unpkg.com/tableexport.jquery.plugin/tableExport.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.16.0/dist/extensions/export/bootstrap-table-export.js"></script>
+
+
+
+<script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js"
+        integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9"
+        crossorigin="anonymous"></script>
+<script src="{{ url_for('static', filename='js/telly.js') }}"></script>
+<script src="{{ url_for('static', filename='js/table.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js" integrity="sha512-rmZcZsyhe0/MAjquhTgiUcb4d9knaFc7b5xAfju483gbEXTkeJRUMIPk6s3ySZMYUHEcjKbjLjyddGWMrNEvZg==" crossorigin="anonymous"></script>
+<div class="container">
+  <!-- Modal -->
+  <div class="modal fade in" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Note From the Management</h4>
+        </div>
+        <div class="modal-body">
+		Please note that the information on this website is for <strong>your</strong> informational purpopse only! (i.e.; don't reveal sources) <br><br>Data on this website refreshes once a day early in the morning and looks for missed VINs late at night.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Got It!</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<script>
+    var $table = $('#table')
+    var $button = $('.js-clear-all')
+
+    $(function() {
+        $button.click(function () {
+            $table.bootstrapTable('clearFilterControl');
+            $table.bootstrapTable('resetSearch');
+        })
+    })
+</script>
+
+</html>

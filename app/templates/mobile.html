@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+        <div class="table-responsive">
+            <table id="table" data-toggle="table" data-classes="table table-no-bordered table-hover table-sm"
+                   data-show-columns="true"
+                   data-search="true"
+                   data-pagination="true"
+                   data-sort-name="serial_number"
+                   data-sort-order="desc"
+                   data-filter-control="true"
+                   data-show-fullscreen="true"
+                   data-cookie="true"
+                   data-cookie-id-table="saveId"
+                   data-show-export="true"
+                   data-page-list="[10,25,50,100,500,1000,all]"
+            >
+                <thead>
+                <tr>
+                    <th data-field="serial_number" data-sortable="true">Serial</th>
+                    <th data-field="vin" data-filter-control="input" data-formatter="formatVin" data-filter-control-placeholder="search...">VIN</th>
+                    <th data-field="car_model" data-filter-control="select" data-sortable="true" data-formatter="formatModel" data-filter-control-placeholder="filter...">Model</th>
+		    <th data-field="model_year" data-filter-control="select" data-sortable="true" data-filter-control-placeholder="filter...">Year</th>
+                    <th data-field="opt_code" data-filter-control="select" data-sortable="true" data-formatter="formatOptions" data-filter-control-placeholder="filter...">Options</th>
+                    <th data-field="ext_color" data-filter-control="select" data-sortable="true" data-filter-control-placeholder="filter...">Ext Color</th>
+                    <th data-field="int_color" data-filter-control="select" data-sortable="true" data-formatter="formatInteriorColor" data-filter-control-placeholder="filter...">Int Color</th>
+                    <th data-field="sold_to" data-filter-control="input" data-sortable="true" data-formatter="formatDealer" data-filter-control-placeholder="search...">Dealer</th>
+                    <th data-field="created_date" data-sortable="true" data-filter-control="input" data-formatter="formatDate" data-filter-control-placeholder="search...">Created</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for car in cars %}
+                    <tr>
+                        <td>{{ car.serial_number }}</td>
+                        <td>{{ car.vin }}</td>
+                        <td>{{ car.car_model }}</td>
+                        <td>{{ car.opt_code }}</td>
+                        <td>{{ car.ext_color }}</td>
+                        <td>{{ car.int_color }}</td>
+                        <td>{{ car.sold_to }}</td>
+                        <td>{{ car.created_date }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

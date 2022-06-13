@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="my-3 p-3 bg-white rounded box-shadow">
+        <h6 class="border-bottom border-gray pb-2 mb-0">Dealer</h6>
+        <div>
+            {{ dealer.dealer_code }}
+        </div>
+        <div>
+            {{ dealer.address }}
+        </div>
+        <div>
+            {{ dealer.zip }}
+        </div>
+        <div class="table-responsive">
+            <table id="table" data-toggle="table" data-classes="table table-no-bordered table-hover table-sm"
+                   data-show-columns="true"
+                   data-checkbox="true"
+                   data-search="true"
+                   data-show-toggle="true"
+                   data-pagination="true"
+                   data-sort-name="serial_number"
+                   data-sort-order="desc"
+                   data-id-field="id"
+                   data-filter-control="true"
+                   data-click-to-select="true"
+            >
+                <thead>
+                <tr>
+                    <th data-field="serial_number" data-sortable="true">Serial</th>
+                    <th data-field="vin" data-sortable="true" data-formatter="formatVin" data-filter-control="input">VIN</th>
+                    <th data-field="car_model" data-sortable="true" data-filter-control="select">Model</th>
+                    <th data-field="opt_code" data-sortable="true" data-filter-control="select" data-formatter="formatOptions">Options</th>
+                    <th data-field="model" data-sortable="true" data-filter-control="select">Description</th>
+                    <th data-field="ext_color" data-sortable="true" data-filter-control="select">Ext Color</th>
+                    <th data-field="int_color" data-sortable="true" data-formatter="formatInteriorColor" data-filter-control="select">Int Color</th>
+                    <th data-field="created_date" data-sortable="true" data-formatter="formatDate" data-filter-control="input">Created</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for car in cars %}
+                    <tr>
+                        <td>{{ car.serial_number }}</td>
+                        <td>{{ car.vin }}</td>
+                        <td>{{ car.car_model }}</td>
+                        <td>{{ car.opt_code }}</td>
+                        <td>{{ car.model_info.description }}</td>
+                        <td>{{ car.ext_color }}</td>
+                        <td>{{ car.int_color }}</td>
+                        <td>{{ car.created_date }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
