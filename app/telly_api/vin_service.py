@@ -61,7 +61,6 @@ def get_next_car(last_vin):
 
 def scrape_vin(vin):
     time.sleep(5)
-    print("sleeping 5 -service-scrape_vin")
     car, dealer, car_model = vin_lookup.scrape_vin(vin)
     repository.create_dealer(dealer)
     repository.create_car_model(car_model)
@@ -75,12 +74,10 @@ def __find_vin__(next_vins):
         try:
             next_car = scrape_vin(vin_number)
             time.sleep(5)
-            print("sleeping 5")
             print(f"found {next_car.vin}")
             return Ok(next_car)
         except PdfReadError as e:
             time.sleep(5)
-            print("sleeping 5")
             print("not found")
     return Err("No results for vin")
 

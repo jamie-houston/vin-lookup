@@ -18,6 +18,7 @@ VIN_DIGIT_VALUES = {'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6, 'G': 7, 'H':
 #VIN_YEAR = 'L'
 #VIN_YEAR = 'M'
 VIN_YEAR = 'N'
+#VIN_YEAR = 'O'
 
 class VinYear:
     def __init__(self, first8, year):
