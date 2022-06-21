@@ -8,7 +8,7 @@ function formatVin(value, row, index) {
 
 function formatOptions(value, row, index) {
     var year = row.model_year;
-    if (year == 2022) {
+    if (year = 2022) {
 	switch (value) {
             case "027":
             case "025":
