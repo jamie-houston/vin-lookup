@@ -93,27 +93,35 @@ function formatOptions(value, row, index) {
 }    
 
 function formatModel(value, row, index) {
-    switch (value) {
-        case 'J4222': 'LX V6 FWD'; 
-        case 'J4232': 'S V6 FWD';
-        case 'J4242': 'EX V6 FWD';
-        case 'J4262': 'SX V6 FWD'; 
-        case 'J4452': 'X-EX V6 AWD';
-        case 'J4462': 'SX V6 AWD';
-        case 'J4472': 'X-SX V6 AWD';
-        case 'J4482': 
-            var year = row.model_year;
-                if (year == "2023") { 
-                    return 'XP-SX V6 AWD';
-                }
-                else {
-                    return 'SX V6 AWD';
-                }
-        case 'J4492': 'SX-P V6 AWD';
-        case 'J44A2': 'X-SX-P V6 AWD';
-        case 'J44B2': 'XP-SX-P V6 AWD'
-            }
-        }
+    var year = row.model_year;
+    if (year == 2023) {
+        switch (value) {
+            case "J4222": return "LX V6 FWD";
+            case "J4232": return "S V6 FWD";
+            case "J4242": return "EX V6 FWD";
+            case "J4262": return "SX V6 FWD";
+            case "J4452": return "X-EX V6 AWD";
+            case "J4462": return "SX V6 AWD";
+            case "J4472": return "X-SX V6 AWD";
+            case "J4482": return "XP-SX V6 AWD";
+            case "J4492": return "SX-P V6 AWD";
+            case "J44A2": return "X-SX-P V6 AWD";
+            case "J44B2": return "XP-SX-P V6 AWD"
+            };
+    }
+    else {
+        switch (value) {
+            case "J4482": return "SX V6 AWD";
+            case "J4442": return "EX V6 AWD";
+            case "J4282": return "SX V6 FWD";
+            case "J4422": return "LX V6 AWD";
+            case "J4242": return "EX V6 FWD";
+            case "J4432": return "S V6 AWD";
+            case "J4222": return "LX V6 FWD";
+            case "J4232": return "S V6 FWD"
+            };
+}
+}
 
 function formatDate(value, row, index){
     return moment(value).format('L');
