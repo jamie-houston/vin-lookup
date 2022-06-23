@@ -22,7 +22,8 @@
 		}	
 	</style>
     <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" crossorigin="anonymous">
+
+    <link href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" rel="stylesheet">
 
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/telly.css') }}">
@@ -104,7 +105,7 @@
 <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js"
         integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9"
         crossorigin="anonymous"></script>
-<script src="{{ url_for('static', filename='js/telly2.js') }}"></script>
+<script src="{{ url_for('static', filename='js/telly.js') }}"></script>
 <script src="{{ url_for('static', filename='js/table.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js" integrity="sha512-rmZcZsyhe0/MAjquhTgiUcb4d9knaFc7b5xAfju483gbEXTkeJRUMIPk6s3ySZMYUHEcjKbjLjyddGWMrNEvZg==" crossorigin="anonymous"></script>
 <div class="container">

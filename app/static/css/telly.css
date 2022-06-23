@@ -89,10 +89,10 @@ body {
 .lh-125 { line-height: 1.25; }
 .lh-150 { line-height: 1.5; }
 .bg-dark {
-	background-color: #808080 !important;
+	background-color: #595959 !important;
 }
 a:hover {
-	color: #377734;
+	color: #919494;
 }
 a {
 	color: #17410d;
@@ -103,15 +103,34 @@ a {
 	border-color: #ccc;
 }
 .btn.btn-primary:hover {
-	color: #377734;
+	color: #919494;
 }
 .page-item.active .page-link {
 	z-index: 1;
 	color: #fff;
-	background-color: #17410d;
-	border-color: #17410d;
+	background-color: #919494;
+	border-color: #919494;
 }
 .page-link {
-	color: #377734;
+	color: #919494;
+}
+hr.icon {
+margin: 25px auto 30px;
+padding: 0;
+border: 0;
+border-top: solid 3px;
+text-align: center;
+color: #595959;
 }
 
+hr.icon:after {
+content: "\f084";
+display: inline-block;
+position: relative;
+top: -1.7rem;
+padding: 0 1rem;
+font-family: FontAwesome;
+font-size: 3rem;
+background-color: #fafafa;
+color: #595959;
+}

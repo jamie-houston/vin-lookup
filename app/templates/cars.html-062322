@@ -2,6 +2,7 @@
 
 {% block content %}
 
+
         <div class="table-responsive">
             <button class="js-clear-all btn btn-primary">Reset All Filters</button>
             <table id="table" data-toggle="table" data-classes="table table-no-bordered table-hover table-sm"
@@ -67,9 +68,10 @@
             </table>
         </div>
     </div>
-    <br>
-    <hr class="icon">
-    <br>
-    2022: (P)RE - Prestige/Premium : T(OW) - Towing : N(E) - Nightfall<br><br>
-	2023: (STD) - Standard : (MAH) - Mahagony : (TER) - Terracotta : (SAG) - Sage Green : (TOW) - Towing Package : (CAP) - Captains Chairs : (ROJ) - Sunroof<br>
+    <div>
+        {{ scraper_stats.count }} VINS added in the last 24 hours.
+    </div>
+    <div>
+        KEY | (P)RE - Prestige/Premium : T(OW) - Towing : N(E) - Nightfall
+    </div>
 {% endblock %}
