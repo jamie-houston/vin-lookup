@@ -9,8 +9,7 @@ For more info on Tellurides, I recommend [this forum](https://tellurideforum.org
 
 ## Running locally
 - Database is Postgres
-- Python 3.6.8
-- PIP
+- Python 3.9
 
 ### Install requirements
 > pip install -r requirements.txt
@@ -27,7 +26,8 @@ For more info on Tellurides, I recommend [this forum](https://tellurideforum.org
 > python run.py db upgrade
 
 ### Import the data:
-
+> heroku pg:backups:capture
+> heroku pg:backups:download
 > pg_restore --verbose --clean --no-acl --no-owner -h localhost -d telly latest.dump
 
 ### Run it locally:

@@ -2,9 +2,7 @@ import os
 import requests
 import io
 import PyPDF2
-from torrequest import TorRequest
 from app.models import Car, CarModel, Dealer
-import time
 
 headers = {
     'cache-control': 'no-cache',

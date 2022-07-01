@@ -13,7 +13,7 @@ ma = Marshmallow()
 cache = Cache()
 
 
-def create_app(config_name):
+def create_app():
     app = Flask(__name__)
     init_caching(app)
     moment = Moment(app)
