@@ -33,3 +33,8 @@ For more info on Tellurides, I recommend [this forum](https://tellurideforum.org
 ### Run it locally:
 > python run.py runserver
 
+
+### Postgresql
+brew install postgresql
+pg_ctl -D /usr/local/var/postgres start
+sql postgres
