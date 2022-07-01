@@ -30,6 +30,7 @@
                 <tr>
                     <th data-field="serial_number" data-sortable="true">Serial</th>
                     <th data-field="vin" data-sortable="true" data-formatter="formatVin" data-filter-control="input">VIN</th>
+		    <th data-field="model_year" data-sortable="true" data-filter-control="select">Year</th>
                     <th data-field="car_model" data-sortable="true" data-filter-control="select">Model</th>
                     <th data-field="opt_code" data-sortable="true" data-filter-control="select" data-formatter="formatOptions">Options</th>
                     <th data-field="model" data-sortable="true" data-filter-control="select">Description</th>
@@ -43,6 +44,7 @@
                     <tr>
                         <td>{{ car.serial_number }}</td>
                         <td>{{ car.vin }}</td>
+			<td>{{ car.model_year }}</td>
                         <td>{{ car.car_model }}</td>
                         <td>{{ car.opt_code }}</td>
                         <td>{{ car.model_info.description }}</td>

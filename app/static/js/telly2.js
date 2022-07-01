@@ -14,7 +14,7 @@ function formatOptions(value, row, index) {
             case "025":
             case "045":
             case "047":
-                return "P/T";
+                return "P/T/N";
             case "022":
             case "020":
             case "040":
@@ -24,7 +24,7 @@ function formatOptions(value, row, index) {
             case "035":
                 var model2 = row.car_model;
                 if (model2 == "J4442") {
-                    return "P/T";
+                    return "P/T/N";
                 }
                 else {
                     return "TOW";
@@ -40,7 +40,7 @@ function formatOptions(value, row, index) {
                     return "P/N";
                 }
                 else {
-                    return "BE";
+                    return "NE";
                 }
             case "037":
                 return "T/N";
