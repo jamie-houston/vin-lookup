@@ -46,14 +46,6 @@
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
-        <script>
-                $(window).load(function()
-                        {
-                            $('#myModal').modal('show');
-                        });
-        </script>
-
 </head>
 <body>
 <ul class="nav nav-tabs bg-dark">
@@ -139,6 +131,11 @@
             $table.bootstrapTable('clearFilterControl');
             $table.bootstrapTable('resetSearch');
         })
+
+        if (sessionStorage.getItem('modalDisplayed') === null){
+            $('#myModal').modal('show');
+            sessionStorage.setItem('modalDisplayed', true);
+        }
     })
 </script>
 
