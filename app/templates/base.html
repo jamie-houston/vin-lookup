@@ -48,10 +48,12 @@
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
         <script>
-                $(window).load(function()
-                        {
-                            $('#myModal').modal('show');
-                        });
+                $(window).load(function() {
+                    if (sessionStorage.getItem('displayModal') === null) {
+                        $('#myModal').modal('show');
+                        sessionStorage.setItem('displayModal', true);
+                    }
+                });
         </script>
 
 </head>
