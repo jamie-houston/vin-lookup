@@ -19,7 +19,7 @@ PyPDF2==1.26.0
 psycopg2==2.9.3
 psycopg2-binary==2.9.3
 requests==2.21.0
-redis==3.3.11
+redis==4.4.4
 result==0.4.0
 sqlalchemy-utils==0.36.1
 sqlalchemy < 1.4.0
